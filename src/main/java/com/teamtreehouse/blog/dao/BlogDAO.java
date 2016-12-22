@@ -4,7 +4,7 @@ import com.teamtreehouse.blog.model.BlogEntry;
 
 import java.util.List;
 
-public interface BlogDao {
+public interface BlogDAO {
     boolean addEntry(BlogEntry blogEntry);
     List<BlogEntry> findAllEntries();
     BlogEntry findEntryBySlug(String slug);

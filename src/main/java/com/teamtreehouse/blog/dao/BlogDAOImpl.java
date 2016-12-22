@@ -1,20 +1,28 @@
 package com.teamtreehouse.blog.dao;
 
 import com.teamtreehouse.blog.model.BlogEntry;
+import com.teamtreehouse.blog.model.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlogDAOImpl implements BlogDAO {
     private List<BlogEntry> entries;
+    private List<Comment> comments;
 
     public BlogDAOImpl() {
         entries = new ArrayList<>();
+        comments = new ArrayList<>();
     }
 
     @Override
     public boolean addEntry(BlogEntry blogEntry) {
         return entries.add(blogEntry);
+    }
+
+    @Override
+    public boolean addComment(Comment blogComment) {
+        return comments.add(blogComment);
     }
 
     @Override

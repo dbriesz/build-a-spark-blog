@@ -1,14 +1,18 @@
 {{#partial "content"}}
-    {{#if username }}
-        <h1>Welcome {{username}}!</h1>
-    {{ else }}
-        <h1>Welcome Comic Book Enthusiasts!</h1>
-        <!-- TODO:dbr - Add sign-in -->
-        <form action="/password" method="post">
-            <input type="text" placeholder="What's your user name?" name="username">
-            <button>Sign in</button>
-        </form>
-    {{/if}}
+    <ul>
+        {{#each entries}}
+            <li>{{ title }}</li>
+            <li>{{ creator }}</li>
+            <li>{{ blogPost }}</li>
+        {{/each}}
+    </ul>
+
+    <form action="/new" method="post">
+        <input type="text" placeholder="Your blog entry title" name="title">
+        <input type="text" placeholder="What is your name?" name="creator">
+        <input type="text" placeholder="Enter your post content here" name="blogPost">
+        <button>Submit</button>
+    </form>
 {{/partial}}
 
 {{> base.hbs}}

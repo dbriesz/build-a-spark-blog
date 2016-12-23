@@ -3,12 +3,12 @@ package com.teamtreehouse.blog.model;
 public class BlogEntry {
     private String title;
     private String creator;
-    private String blogEntry;
+    private String blogPost;
 
-    public BlogEntry(String title, String creator, String blogEntry) {
+    public BlogEntry(String title, String creator, String blogPost) {
         this.title = title;
         this.creator = creator;
-        this.blogEntry = blogEntry;
+        this.blogPost = blogPost;
     }
 
     public String getTitle() {
@@ -19,8 +19,8 @@ public class BlogEntry {
         return creator;
     }
 
-    public String getBlogEntry() {
-        return blogEntry;
+    public String getBlogPost() {
+        return blogPost;
     }
 
     @Override
@@ -32,14 +32,14 @@ public class BlogEntry {
 
         if (title != null ? !title.equals(blogEntry1.title) : blogEntry1.title != null) return false;
         if (creator != null ? !creator.equals(blogEntry1.creator) : blogEntry1.creator != null) return false;
-        return blogEntry != null ? blogEntry.equals(blogEntry1.blogEntry) : blogEntry1.blogEntry == null;
+        return blogPost != null ? blogPost.equals(blogEntry1.blogPost) : blogEntry1.blogPost == null;
     }
 
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (creator != null ? creator.hashCode() : 0);
-        result = 31 * result + (blogEntry != null ? blogEntry.hashCode() : 0);
+        result = 31 * result + (blogPost != null ? blogPost.hashCode() : 0);
         return result;
     }
 

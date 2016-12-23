@@ -1,18 +1,36 @@
 {{#partial "content"}}
-    <ul>
-        {{#each entries}}
-            <li>{{ title }}</li>
-            <li>{{ creator }}</li>
-            <li>{{ blogPost }}</li>
-        {{/each}}
-    </ul>
 
-    <form action="/new" method="post">
-        <input type="text" placeholder="Your blog entry title" name="title">
-        <input type="text" placeholder="What is your name?" name="creator">
-        <input type="text" placeholder="Enter your post content here" name="blogPost">
+    <h1>Welcome Comic Book Enthusiasts!</h1>
+
+    <form action="/" method="post">
+
+        <fieldset>
+
+            <label for="name">Enter your username:</label>
+            <input type="text" id="user_name" name="username">
+
+        </fieldset>
+
         <button>Submit</button>
     </form>
+
+    <div class="entry">
+        {{#each entries}}
+        <div class="title">{{ title }}<div>
+        <div class="creator">{{ creator }}</div>
+        <div class="post">{{ blogPost }}</div>
+        {{/each}}
+    </div>
+
+    <div class="comments">
+        {{#each comments}}
+            <div class="comment">
+                <h2>{{commenter}}</h2>
+                {{{blogComment}}}
+            </div>
+        {{/each}}
+    </div>
+
 {{/partial}}
 
 {{> base.hbs}}

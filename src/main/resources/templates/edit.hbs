@@ -1,17 +1,47 @@
 {{#partial "content"}}
-    {{#if username }}
+    {{#if password }}
         <h1>Welcome {{username}}!</h1>
 
     {{ else }}
-        <h1>Welcome Comic Book Enthusiasts!</h1>
-        <form action="/password" method="blogPost">
-            <input type="text" placeholder="What's your user name?" name="username">
+        <form action="/edit" method="post">
+
+        <h1>Admin Sign-In</h1>
+
+        <fieldset>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+        </fieldset>
+
             <button>Sign in</button>
         </form>
     {{/if}}
+
+    <form action="/edit" method="post">
+
+        <h1>New Blog Entry</h1>
+
+        <fieldset>
+
+            <label for="title">Blog entry title:</label>
+            <input type="text" id="entry_title" name="title">
+
+            <label for="creator">Your name:</label>
+            <input type="text" id="name" name="creator">
+
+            <label for="blogPost">Blog entry content:</label>
+            <textarea id="content" name="blogPost"></textarea>
+
+        </fieldset>
+
+        <button type="submit">Submit</button>
+
+    </form>
 {{/partial}}
 
-<div class="container">
+
+<!--<div class="container">
     <div class="edit-entry">
         <h2>Edit Entry</h2>
         <form>
@@ -23,6 +53,6 @@
             <a href="#" class="button button-secondary">Cancel</a>
         </form>
     </div>
-</div>
+</div>-->
 
 {{> base.hbs}}

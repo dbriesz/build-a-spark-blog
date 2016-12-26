@@ -27,7 +27,12 @@ public class Main {
 
         before("/edit", (req, res) -> {
             if (req.attribute("username") == null) {
-                setFlashMessage(req, "Incorrect user name.  Please try again.");
+                setFlashMessage(req, "Please sign in first");
+                res.redirect("/password");
+                halt();
+            }
+            if (!req.attribute("username").equals("admin")) {
+                setFlashMessage(req, "Incorrect user name. Please try again.");
                 res.redirect("/password");
                 halt();
             }

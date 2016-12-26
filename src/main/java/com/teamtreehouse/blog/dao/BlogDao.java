@@ -5,7 +5,7 @@ import com.teamtreehouse.blog.model.Comment;
 
 import java.util.List;
 
-public interface BlogDAO {
+public interface BlogDao {
     boolean addEntry(BlogEntry blogEntry);
     boolean addComment(Comment blogComment);
     List<BlogEntry> findAllEntries();

@@ -1,43 +1,28 @@
 {{#partial "content"}}
-    {{#if password }}
+
         <h1>Welcome {{username}}!</h1>
 
-    {{ else }}
         <form action="/edit" method="post">
 
-        <h1>Admin Sign-In</h1>
+            <h1>New Blog Entry</h1>
 
-        <fieldset>
+            <fieldset>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+                <label for="title">Blog entry title:</label>
+                <input type="text" id="entry_title" name="title">
 
-        </fieldset>
+                <label for="creator">Your name:</label>
+                <input type="text" id="name" name="creator">
 
-            <button>Sign in</button>
+                <label for="blogPost">Blog entry content:</label>
+                <textarea id="content" name="blogPost"></textarea>
+
+            </fieldset>
+
+            <button type="submit">Submit</button>
+
         </form>
-    {{/if}}
 
-    <form action="/edit" method="post">
-
-        <h1>New Blog Entry</h1>
-
-        <fieldset>
-
-            <label for="title">Blog entry title:</label>
-            <input type="text" id="entry_title" name="title">
-
-            <label for="creator">Your name:</label>
-            <input type="text" id="name" name="creator">
-
-            <label for="blogPost">Blog entry content:</label>
-            <textarea id="content" name="blogPost"></textarea>
-
-        </fieldset>
-
-        <button type="submit">Submit</button>
-
-    </form>
 {{/partial}}
 
 

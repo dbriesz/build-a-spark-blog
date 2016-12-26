@@ -6,11 +6,11 @@ import com.teamtreehouse.blog.model.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlogDAOImpl implements BlogDAO {
+public class BlogDaoImpl implements BlogDao {
     private List<BlogEntry> entries;
     private List<Comment> comments;
 
-    public BlogDAOImpl() {
+    public BlogDaoImpl() {
         entries = new ArrayList<>();
         comments = new ArrayList<>();
     }

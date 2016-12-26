@@ -27,19 +27,9 @@ public class Main {
 
         before("/edit", (req, res) -> {
             if (req.attribute("username") == null) {
-                setFlashMessage(req, "Please enter a user name first!");
+                setFlashMessage(req, "Incorrect user name.  Please try again.");
                 res.redirect("/password");
                 halt();
-            }
-            if (req.attribute("password") != "admin") {
-                setFlashMessage(req, "Incorrect password, please try again.");
-                res.redirect("/password");
-                halt();
-            } else {
-                Map<String, Object> model = new HashMap<>();
-                String username = req.queryParams("username");
-                res.cookie("username", username);
-                model.put("username", username);
             }
         });
 
@@ -47,13 +37,6 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
             model.put("entries", dao.findAllEntries());
             return new ModelAndView(model, "index.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("/", (req, res) -> {
-            String username = req.queryParams("username");
-            res.cookie("username", username);
-            res.redirect("/");
-            return null;
         }, new HandlebarsTemplateEngine());
 
         get("/edit", (req, res) -> {
@@ -77,14 +60,10 @@ public class Main {
         }, new HandlebarsTemplateEngine());
 
         post("/password", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
+            Map<String, String> model = new HashMap<>();
             String username = req.queryParams("username");
-            model.put("username", req.attribute("username"));
-            model.put("flashMessage", captureFlashMessage(req));
-            res.redirect("/password");
-            String password = req.queryParams("password");
-            model.put("password", req.attribute("password"));
-            model.put("flashMessage", captureFlashMessage(req));
+            res.cookie("username", username);
+            model.put("username", username);
             res.redirect("/edit");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -112,4 +91,5 @@ public class Main {
         }
         return message;
     }
+
 }

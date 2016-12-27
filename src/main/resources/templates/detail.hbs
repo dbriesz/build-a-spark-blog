@@ -1,0 +1,19 @@
+{{#partial "content"}}
+    <h3>{{ detail.commenter }}</h3>
+    <p>{{ detail.blogComment }} Voters</p>
+    <ul>
+        {{#each detail.comment}}
+            <li>{{ this }}</li>
+        {{/each}}
+    </ul>
+
+    <form action="/index/{{ detail.slug }}/comment" method="post">
+        <button>Comment</button>
+    </form>
+
+{{/partial}}
+
+{{#partial "title"}}
+    Blog Comment - {{ detail.commenter }}
+{{/partial}}
+{{> base.hbs}}

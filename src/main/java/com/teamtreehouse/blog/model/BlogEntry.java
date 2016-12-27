@@ -2,10 +2,7 @@ package com.teamtreehouse.blog.model;
 
 import com.github.slugify.Slugify;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class BlogEntry {
     private String slug;
@@ -13,10 +10,11 @@ public class BlogEntry {
     private String creator;
     private String blogPost;
     private Date date;
-    private Set<String> commenters;
+    private List<Comment> comments;
+    private Comment comment;
 
     public BlogEntry(String title, String creator, String blogPost) {
-        commenters = new HashSet<>();
+        comments = new ArrayList<>();
         this.title = title;
         this.date = new Date();
         this.creator = creator;
@@ -45,8 +43,8 @@ public class BlogEntry {
         return slug;
     }
 
-    public boolean addCommenter(String commenterUserName) {
-        return commenters.add(commenterUserName);
+    public ArrayList getComments() {
+        return new ArrayList<>(comments);
     }
 
     @Override
@@ -71,6 +69,6 @@ public class BlogEntry {
 
     public boolean addComment(Comment comment) {
         // Store these comments!
-        return false;
+        return comments.add(comment);
     }
 }

@@ -149,7 +149,7 @@ a.link {
 .edit-entry,
 .new-entry,
 .password {
-	max-width: 700px;
+	max-width: 480px;
 	margin: 0 auto;
 	padding: 90px 0 100px 0;
 }

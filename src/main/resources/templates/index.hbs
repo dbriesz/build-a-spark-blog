@@ -4,25 +4,17 @@
 
     <div class="entry">
         {{#each entries}}
-        <div class="title">
-            <form action="/index/{{ slug }}/comment" method="post">
-                {{ title }} <button>Comment</button>
-            </form>
-        <div>
+            <h1>{{ title }}</h1>
+            <h2>{{ creator }}</h2>
+            <h3>{{ date }}</h3>
+            <p>{{ blogPost }}</p>
+        <section>
+            <h2>{{ commenter }}</h2>
+            <p>{{ blogComment }}</p>
+        </section>
 
-        <div class="creator"><h3>{{ creator }}</h3></div>
+        <div><a href="/detail"></a><button>Add Comment</button>
 
-        <div class="post"><p>{{ blogPost }}</p></div>
-
-            <div class="comments">
-                {{#each comments}}
-                    <div class="comment">
-                        <h2>{{ commenter }}</h2>
-                        <p>{{ blogComment }}</p>
-                    </div>
-                </div>
-                {{/each}}
-        </div>
         {{/each}}
     </div>
     </div>

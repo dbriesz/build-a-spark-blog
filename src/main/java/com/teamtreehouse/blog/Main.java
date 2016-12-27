@@ -73,16 +73,16 @@ public class Main {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        get("/edit/:slug", (req, res) -> {
+        get("/index/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("detail", dao.findEntryBySlug(req.params("slug")));
+            model.put("comment.hbs", dao.findEntryBySlug(req.params("slug")));
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/edit/:slug/comment", (req, res) -> {
+        post("/index/:slug/detail.hbs", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
-            blogEntry.addCommenter(req.attribute("username"));
-            res.redirect("/edit");
+            blogEntry.addComment(req.attribute("username"));
+            res.redirect("/index");
             return null;
         });
 

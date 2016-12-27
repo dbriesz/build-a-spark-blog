@@ -21,11 +21,6 @@ public class BlogDaoImpl implements BlogDao {
     }
 
     @Override
-    public boolean addComment(Comment blogComment) {
-        return comments.add(blogComment);
-    }
-
-    @Override
     public List<BlogEntry> findAllEntries() {
         return new ArrayList<>(entries);
     }

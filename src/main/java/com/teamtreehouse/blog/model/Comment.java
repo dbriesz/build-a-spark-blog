@@ -1,5 +1,8 @@
 package com.teamtreehouse.blog.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Comment {
     private String commenter;
     private String blogComment;

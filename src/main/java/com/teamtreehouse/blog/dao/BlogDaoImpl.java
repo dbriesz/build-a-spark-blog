@@ -32,6 +32,9 @@ public class BlogDaoImpl implements BlogDao {
 
     @Override
     public BlogEntry findEntryBySlug(String slug) {
-        return null;
+        return entries.stream()
+                .filter(blogEntry -> blogEntry.getSlug().equals(slug))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
     }
 }

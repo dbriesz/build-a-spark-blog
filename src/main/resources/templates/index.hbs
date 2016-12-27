@@ -4,21 +4,28 @@
 
     <div class="entry">
         {{#each entries}}
-        <div class="title">{{ title }}<div>
-        <div class="creator">{{ creator }}</div>
-        <div class="post">{{ blogPost }}</div>
+        <div class="title">
+            <form action="/index/{{ slug }}/comment" method="post">
+                {{ title }} <button>Comment</button>
+            </form>
+        <div>
+
+        <div class="creator"><h3>{{ creator }}</h3></div>
+
+        <div class="post"><p>{{ blogPost }}</p></div>
+
+            <div class="comments">
+                {{#each comments}}
+                    <div class="comment">
+                        <h2>{{ commenter }}</h2>
+                        <p>{{ blogComment }}</p>
+                    </div>
+                </div>
+                {{/each}}
+        </div>
         {{/each}}
     </div>
-
-    <div class="comments">
-        {{#each comments}}
-            <div class="comment">
-                <h2>{{commenter}}</h2>
-                {{{blogComment}}}
-            </div>
-        {{/each}}
     </div>
-
 {{/partial}}
 
 {{> base.hbs}}

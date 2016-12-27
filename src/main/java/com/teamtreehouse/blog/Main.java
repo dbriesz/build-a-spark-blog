@@ -73,6 +73,19 @@ public class Main {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        get("/edit/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("detail", dao.findEntryBySlug(req.params("slug")));
+            return new ModelAndView(model, "detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/edit/:slug/comment", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            blogEntry.addCommenter(req.attribute("username"));
+            res.redirect("/edit");
+            return null;
+        });
+
     }
 
     private static void setFlashMessage(Request req, String message) {

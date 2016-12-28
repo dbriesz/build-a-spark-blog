@@ -1,23 +1,25 @@
 {{#partial "content"}}
 
-    <h1>Welcome Comic Book Enthusiasts!</h1>
+    <section>
+        <div class="container">
+            <div class="entry-list">
+                {{#each entries}}
+                <article>
+                    <h1><a href="/detail/{{ detail.slug }}/comment">{{ title }}</a></h1>
+                    <h2>{{ creator }}</h2>
+                    <time>{{ date }}</time>
+                    <p>{{ blogPost }}</p>
+                </article>
+                    <ul>
+                        {{#each detail.comment}}
+                            <li>{{ this }}</li>
+                        {{/each}}
+                    </ul>
+                {{/each}}
+            </div>
+        </div>
+    </section>
 
-    <div class="entry">
-        {{#each entries}}
-            <h1>{{ title }}</h1>
-            <h2>{{ creator }}</h2>
-            <h3>{{ date }}</h3>
-            <p>{{ blogPost }}</p>
-        <section>
-            <h2>{{ commenter }}</h2>
-            <p>{{ blogComment }}</p>
-        </section>
-
-        <div><a class="new-entry button button-round" href="/index/{{ slug }}/comment">Comment<i class="material-icons">create</i></a>
-
-        {{/each}}
-    </div>
-    </div>
 {{/partial}}
 
 {{> base.hbs}}

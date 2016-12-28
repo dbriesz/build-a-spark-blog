@@ -1,45 +1,25 @@
 {{#partial "title"}}Signed in{{/partial}}
 
 {{#partial "content"}}
-    
-    <h1>Welcome {{username}}!</h1>
-    
-    <form action="/edit" method="post">
-    
-        <h1>New Blog Entry</h1>
-    
-        <fieldset>
-    
-            <label for="title">Blog entry title:</label>
-            <input type="text" id="entry_title" name="title">
-    
-            <label for="creator">Your name:</label>
-            <input type="text" id="name" name="creator">
-    
-            <label for="blogPost">Blog entry content:</label>
-            <textarea rows="5" id="content" name="blogPost"></textarea>
-    
-        </fieldset>
-    
-        <button type="submit">Submit</button>
-    
-    </form>
+
+    <section>
+        <div class="container">
+            <div class="new-entry">
+                <h2>Publish New Entry</h2>
+                <form action="/edit" method="post">
+                    <label for="title"> Title</label>
+                    <input type="text" name="title"><br>
+                    <label for="creator"> Your name</label>
+                    <input type="text" name="creator"><br>
+                    <label for="blogPost">Entry</label>
+                    <textarea rows="5" name="blogPost"></textarea>
+                    <input type="submit" value="Publish Entry" class="button">
+                    <a href="/" class="button button-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </section>
 
 {{/partial}}
-
-
-<!--<div class="container">
-    <div class="edit-entry">
-        <h2>Edit Entry</h2>
-        <form>
-            <label for="title"> Title</label>
-            <input type="text" name="title"><br>
-            <label for="entry">Entry</label>
-            <textarea rows="5" name="entry"></textarea>
-            <input type="submit" value="Save Entry" class="button">
-            <a href="#" class="button button-secondary">Cancel</a>
-        </form>
-    </div>
-</div>-->
 
 {{> base.hbs}}

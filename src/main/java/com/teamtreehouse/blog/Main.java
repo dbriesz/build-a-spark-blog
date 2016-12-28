@@ -19,6 +19,10 @@ public class Main {
         staticFileLocation("/public");
         BlogDao dao = new BlogDaoImpl();
 
+        dao.addEntry(new BlogEntry("The best day I’ve ever had", "Clark Kent", "text 1"));
+        dao.addEntry(new BlogEntry("The absolute worst day I’ve ever had", "Wally West", "text 2"));
+        dao.addEntry(new BlogEntry("That time at the mall", "Diana Prince", "text 3"));
+
         before((req, res) -> {
             if (req.cookie("username") != null) {
                 req.attribute("username", req.cookie("username"));
@@ -73,13 +77,13 @@ public class Main {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        get("/index/:slug", (req, res) -> {
+        get("/detail/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("comment.hbs", dao.findEntryBySlug(req.params("slug")));
+            model.put("comment", dao.findEntryBySlug(req.params("slug")));
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/index/:slug/detail.hbs", (req, res) -> {
+        post("/detail/:slug/comment", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             blogEntry.addComment(req.attribute("username"));
             res.redirect("/index");

@@ -20,24 +20,21 @@ public class Main {
         staticFileLocation("/public");
         BlogDao dao = new BlogDaoImpl();
 
-        dao.addEntry(new BlogEntry("The best day I’ve ever had", "Clark Kent", "example text 1"));
-        dao.addEntry(new BlogEntry("The absolute worst day I’ve ever had", "Wally West", "example text 2"));
-        dao.addEntry(new BlogEntry("That time at the mall", "Diana Prince", "example text 3"));
+        // Adds 3 example blog entries with comments.
+        BlogEntry entry1 = new BlogEntry("The best day I’ve ever had", "Clark Kent",
+                "Lois, Jon and I went to the country fair today. Jon rode a roller coaster for the first time... ");
+        dao.addEntry(entry1);
+        entry1.addComment(new Comment("Lois Lane", "Best. Day. Ever."));
 
-        for (int i = 1; i <= 3; i++) {
-            BlogEntry blogEntryToAdd = new BlogEntry(
-                    "title " + i,
-                    "creator " + i,
-                    "blogPost " + i
-            );
-            blogEntryToAdd.addComment(
-                    new Comment(
-                    "commenter " + i,
-                     "blogComment " + i
-                    )
-            );
-            dao.addEntry(blogEntryToAdd);
-        }
+        BlogEntry entry2 = new BlogEntry("The absolute worst day I’ve ever had", "Wally West",
+                "I'm back in Central City through some miracle, yet Linda doesn't remember me at all...");
+        dao.addEntry(entry2);
+        entry2.addComment(new Comment("Abra Kadabra", "I have finally defeated you!"));
+
+        BlogEntry entry3 = new BlogEntry("That time at the mall", "Diana Prince",
+                "Went to the mall today for the first time and felt very overwhelmed...");
+        dao.addEntry(entry3);
+        entry3.addComment(new Comment("Steve Trevor", "<3"));
 
         before((req, res) -> {
             // Check to see if a cookie is present and assigns the value to req.attribute for re-use.

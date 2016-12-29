@@ -75,6 +75,7 @@ public class BlogEntry {
 
     public boolean addComment(Comment comment) {
         // Store these comments!
+        date = new Date();
         return comments.add(comment);
     }
 }

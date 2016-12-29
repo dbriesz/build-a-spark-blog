@@ -1,12 +1,16 @@
 package com.teamtreehouse.blog.model;
 
+import java.util.Date;
+
 public class Comment {
     private String author;
     private String body;
+    private Date date;
 
     public Comment(String author, String body) {
         this.author = author;
         this.body = body;
+        this.date = new Date();
     }
 
     public String getAuthor() {
@@ -15,6 +19,10 @@ public class Comment {
 
     public String getBody() {
         return body;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     @Override

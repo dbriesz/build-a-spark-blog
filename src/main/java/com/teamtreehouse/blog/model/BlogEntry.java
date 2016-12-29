@@ -43,6 +43,13 @@ public class BlogEntry {
         return slug;
     }
 
+    public void editEntry(String title, String creator, String blogPost) {
+        date = new Date();
+        this.title = title;
+        this.creator = creator;
+        this.blogPost = blogPost;
+    }
+
     public ArrayList getComments() {
         return new ArrayList<>(comments);
     }

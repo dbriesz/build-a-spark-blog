@@ -19,9 +19,9 @@ public class Main {
         staticFileLocation("/public");
         BlogDao dao = new BlogDaoImpl();
 
-        dao.addEntry(new BlogEntry("The best day I’ve ever had", "Clark Kent", "text 1"));
-        dao.addEntry(new BlogEntry("The absolute worst day I’ve ever had", "Wally West", "text 2"));
-        dao.addEntry(new BlogEntry("That time at the mall", "Diana Prince", "text 3"));
+        dao.addEntry(new BlogEntry("The best day I’ve ever had", "Clark Kent", "example text 1"));
+        dao.addEntry(new BlogEntry("The absolute worst day I’ve ever had", "Wally West", "example text 2"));
+        dao.addEntry(new BlogEntry("That time at the mall", "Diana Prince", "example text 3"));
 
         before((req, res) -> {
             if (req.cookie("username") != null) {
@@ -48,12 +48,17 @@ public class Main {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/new", (req, res) -> {
+            Map<String, String> model = new HashMap<>();
+            return new ModelAndView(model, "new.hbs");
+        }, new HandlebarsTemplateEngine());
+
         get("/edit", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             return new ModelAndView(model, "edit.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/edit", (req, res) -> {
+        post("/new", (req, res) -> {
             String title = req.queryParams("title");
             String creator = req.queryParams("creator");
             String blogPost = req.queryParams("blogPost");
@@ -62,6 +67,16 @@ public class Main {
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
+
+        put("/edit/:slug/edit", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            String title = req.queryParams("title");
+            String creator = req.queryParams("creator");
+            String blogPost = req.queryParams("blogPost");
+            blogEntry.editEntry(title, creator, blogPost);
+            res.redirect("/");
+            return null;
+        });
 
         get("/password", (req, res) -> {
             Map<String, String> model = new HashMap<>();
@@ -79,14 +94,14 @@ public class Main {
 
         get("/detail/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("comment", dao.findEntryBySlug(req.params("slug")));
+            model.put("detail", dao.findEntryBySlug(req.params("slug")));
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/detail/:slug/comment", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             blogEntry.addComment(req.attribute("username"));
-            res.redirect("/index");
+            res.redirect("/");
             return null;
         });
 

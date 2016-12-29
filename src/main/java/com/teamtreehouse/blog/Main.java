@@ -53,11 +53,6 @@ public class Main {
             return new ModelAndView(model, "new.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/edit", (req, res) -> {
-            Map<String, String> model = new HashMap<>();
-            return new ModelAndView(model, "edit.hbs");
-        }, new HandlebarsTemplateEngine());
-
         post("/new", (req, res) -> {
             String title = req.queryParams("title");
             String creator = req.queryParams("creator");
@@ -68,7 +63,14 @@ public class Main {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        put("/edit/:slug/edit", (req, res) -> {
+        get("/edit/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            model.put("detail", blogEntry);
+            return new ModelAndView(model, "edit.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        put("/detail/:slug/edit", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String title = req.queryParams("title");
             String creator = req.queryParams("creator");

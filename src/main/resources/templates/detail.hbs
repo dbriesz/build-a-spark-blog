@@ -4,11 +4,11 @@
         <div class="container">
             <div class="entry-list single">
                 <article>
-                    <h1>{{ detail.title }}</h1>
-                    <time>{{ detail.date }}</time>
+                    <h1>{{ blogEntry.title }}</h1>
+                    <time>{{ blogEntry.date }}</time>
                     <div class="entry">
-                        <p>{{ detail.blogPost }}</p>
-                        <p><a class="link" href="/edit/{{ detail.slug }}">Edit Entry</a></p>
+                        <p>{{ blogEntry.blogPost }}</p>
+                        <p><a class="link" href="/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
                     </div>
                 </article>
             </div>
@@ -18,14 +18,18 @@
         <div class="container">
             <h2>Comments</h2>
             <div class="comment">
-                <p>{{ detail.comments }}</p>
+                {{#each blogEntry.comments}}
+                    <strong>{{ this.author }}</strong>
+                    <time>{{ date }}</time>
+                    <p>{{ this.body }}</p>
+                {{/each}}
             </div>
             <div class="new-comment">
-                <form action="/detail/{{ detail.slug }}/comment" method="post">
+                <form action="/detail/{{ blogEntry.slug }}/comment" method="post">
                     <label for="name"> Name</label>
-                    <input type="text" name="commenter"><br>
+                    <input type="text" name="author"><br>
                     <label for="comment">Comment</label>
-                    <textarea rows="5" name="blogComment"></textarea>
+                    <textarea rows="5" name="body"></textarea>
                     <input type="submit" value="Post Comment" class="button">
                 </form>
             </div>

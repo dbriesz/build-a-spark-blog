@@ -1,23 +1,20 @@
 package com.teamtreehouse.blog.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Comment {
-    private String commenter;
-    private String blogComment;
+    private String author;
+    private String body;
 
-    public Comment(String commenter, String blogComment) {
-        this.commenter = commenter;
-        this.blogComment = blogComment;
+    public Comment(String author, String body) {
+        this.author = author;
+        this.body = body;
     }
 
-    public String getCommenter() {
-        return commenter;
+    public String getAuthor() {
+        return author;
     }
 
-    public String getBlogComment() {
-        return blogComment;
+    public String getBody() {
+        return body;
     }
 
     @Override
@@ -27,14 +24,14 @@ public class Comment {
 
         Comment comment = (Comment) o;
 
-        if (commenter != null ? !commenter.equals(comment.commenter) : comment.commenter != null) return false;
-        return blogComment != null ? blogComment.equals(comment.blogComment) : comment.blogComment == null;
+        if (author != null ? !author.equals(comment.author) : comment.author != null) return false;
+        return body != null ? body.equals(comment.body) : comment.body == null;
     }
 
     @Override
     public int hashCode() {
-        int result = commenter != null ? commenter.hashCode() : 0;
-        result = 31 * result + (blogComment != null ? blogComment.hashCode() : 0);
+        int result = author != null ? author.hashCode() : 0;
+        result = 31 * result + (body != null ? body.hashCode() : 0);
         return result;
     }
 }

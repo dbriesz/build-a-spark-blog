@@ -11,7 +11,6 @@ public class BlogEntry {
     private String blogPost;
     private Date date;
     private List<Comment> comments;
-    private Comment comment;
 
     public BlogEntry(String title, String creator, String blogPost) {
         comments = new ArrayList<>();

@@ -10,11 +10,11 @@
                     <time>{{ date }}</time>
                     <p>{{ blogPost }}</p>
                 </article>
-                    <ul>
-                        {{#each detail.comment}}
-                            <li>{{ this }}</li>
-                        {{/each}}
-                    </ul>
+                <div class="comment">
+                    {{#each blogEntry.comment}}
+                        <p>{{ this }}</p>
+                    {{/each}}
+                </div>
                 {{/each}}
             </div>
         </div>

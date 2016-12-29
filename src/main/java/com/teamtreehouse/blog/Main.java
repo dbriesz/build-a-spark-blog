@@ -2,6 +2,7 @@ package com.teamtreehouse.blog;
 
 import com.teamtreehouse.blog.dao.BlogDao;
 import com.teamtreehouse.blog.dao.BlogDaoImpl;
+import com.teamtreehouse.blog.dao.NotFoundException;
 import com.teamtreehouse.blog.model.BlogEntry;
 import com.teamtreehouse.blog.model.Comment;
 import spark.ModelAndView;
@@ -43,7 +44,22 @@ public class Main {
             }
         });
 
-        before("/edit", (req, res) -> {
+        before("/new", (req, res) -> {
+            // Prompts for a username if one isn't present.
+            if (req.attribute("username") == null) {
+                setFlashMessage(req, "Please sign in first");
+                res.redirect("/password");
+                halt();
+            }
+            // Restricts ability to edit posts until a username of "admin" is entered.
+            if (!req.attribute("username").equals("admin")) {
+                setFlashMessage(req, "Incorrect user name. Please try again.");
+                res.redirect("/password");
+                halt();
+            }
+        });
+
+        before("/edit/:slug", (req, res) -> {
             // Prompts for a username if one isn't present.
             if (req.attribute("username") == null) {
                 setFlashMessage(req, "Please sign in first");
@@ -120,7 +136,7 @@ public class Main {
             String username = req.queryParams("username");
             res.cookie("username", username);
             model.put("username", username);
-            res.redirect("/edit");
+            res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -138,7 +154,10 @@ public class Main {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String author = req.queryParams("author");
             String body = req.queryParams("body");
-            blogEntry.addComment(new Comment(author, body));
+            boolean commentAdded = blogEntry.addComment(new Comment(author, body));
+            if (commentAdded) {
+                setFlashMessage(req, "Thanks for your comment!");
+            }
             res.redirect("/");
             return null;
         });

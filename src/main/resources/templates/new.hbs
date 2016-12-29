@@ -2,23 +2,23 @@
 
 {{#partial "content"}}
 
-    <section>
-        <div class="container">
-            <div class="new-entry">
-                <h2>Publish New Entry</h2>
-                <form action="/new" method="post">
-                    <label for="title"> Title</label>
-                    <input type="text" name="title"><br>
-                    <label for="creator"> Your name</label>
-                    <input type="text" name="creator"><br>
-                    <label for="blogPost">Entry</label>
-                    <textarea rows="5" name="blogPost"></textarea>
-                    <input type="submit" value="Publish Entry" class="button">
-                    <a href="/" class="button button-secondary">Cancel</a>
-                </form>
+        <section>
+            <div class="container">
+                <div class="new-entry">
+                    <h2>Publish New Entry</h2>
+                    <form action="/new" method="post">
+                        <label for="title"> Title</label>
+                        <input type="text" name="title"><br>
+                        <label for="creator"> Your name</label>
+                        <input type="text" name="creator"><br>
+                        <label for="blogPost">Entry</label>
+                        <textarea rows="5" name="blogPost"></textarea>
+                        <input type="submit" value="Publish Entry" class="button">
+                        <a href="/" class="button button-secondary">Cancel</a>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 {{/partial}}
 

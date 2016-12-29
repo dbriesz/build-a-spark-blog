@@ -139,7 +139,9 @@ public class Main {
 
             // Finds a specific blog entry, passes in a new comment, then redirects to home.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
-            blogEntry.addComment(new Comment(String author, String body));
+            String author = req.queryParams("author");
+            String body = req.queryParams("body");
+            blogEntry.addComment(new Comment(author, body));
             res.redirect("/");
             return null;
         });

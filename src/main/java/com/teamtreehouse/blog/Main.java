@@ -75,7 +75,7 @@ public class Main {
             Map<String, String> model = new HashMap<>();
 
             // Displays page with form for adding a new blog entry.
-            return new ModelAndView(model, "new.hbs");
+            return new ModelAndView(model, "admin/new.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/admin/new", (req, res) -> {
@@ -97,10 +97,10 @@ public class Main {
             // Finds a specific blog entry and displays it on the edit page.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             model.put("blogEntry", blogEntry);
-            return new ModelAndView(model, "edit.hbs");
+            return new ModelAndView(model, "admin/edit.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/detail/:slug/edit", (req, res) -> {
+        post("/detail/:slug/admin/edit", (req, res) -> {
 
             // Finds a specific blog entry, then replaces each parameter with the new values below.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));

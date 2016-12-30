@@ -117,6 +117,7 @@ public class Main {
             Map<String, String> model = new HashMap<>();
 
             // Displays password prompt page.
+            model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "password.hbs");
         }, new HandlebarsTemplateEngine());
 

@@ -5,6 +5,7 @@ import com.teamtreehouse.blog.dao.BlogDaoImpl;
 import com.teamtreehouse.blog.dao.NotFoundException;
 import com.teamtreehouse.blog.model.BlogEntry;
 import com.teamtreehouse.blog.model.Comment;
+import com.teamtreehouse.blog.model.Tag;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -26,16 +27,19 @@ public class Main {
                 "Lois, Jon and I went to the country fair today. Jon rode a roller coaster for the first time... ");
         dao.addEntry(entry1);
         entry1.addComment(new Comment("Lois Lane", "Best. Day. Ever."));
+        entry1.addTag(new Tag("county fair"));
 
         BlogEntry entry2 = new BlogEntry("The absolute worst day I’ve ever had", "Wally West",
                 "I'm back in Central City through some miracle, yet Linda doesn't remember me at all...");
         dao.addEntry(entry2);
         entry2.addComment(new Comment("Abra Kadabra", "I have finally defeated you!"));
+        entry2.addTag(new Tag("bad day"));
 
         BlogEntry entry3 = new BlogEntry("That time at the mall", "Diana Prince",
                 "Went to the mall today for the first time and felt very overwhelmed...");
         dao.addEntry(entry3);
         entry3.addComment(new Comment("Steve Trevor", "<3"));
+        entry2.addTag(new Tag("shopping"));
 
         before((req, res) -> {
             // Check to see if a cookie is present and assigns the value to req.attribute for re-use.
@@ -161,7 +165,18 @@ public class Main {
             return null;
         });
 
-        post("/detail/:slug/delete", (req, res) -> {
+        post("/admin/edit/:slug/tag", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            String tag = req.queryParams("tag");
+            boolean tagAdded = blogEntry.addTag(new Tag(tag));
+            if (tagAdded) {
+                setFlashMessage(req, "Tag added!");
+            }
+            res.redirect("/");
+            return null;
+        });
+
+        post("/admin/edit/:slug/delete", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             dao.deleteEntry((blogEntry));
             setFlashMessage(req, "Entry deleted!");

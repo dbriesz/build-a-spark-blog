@@ -45,7 +45,7 @@ public class Main {
         });
 
         before("/admin/*", (req, res) -> {
-            res.cookie("redirectTo", req.uri());
+            res.cookie("/","redirectTo", req.uri(), -1, false, false);
 
             // Prompts for a username if one isn't present.
             if (req.attribute("username") == null) {

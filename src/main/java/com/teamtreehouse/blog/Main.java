@@ -44,31 +44,19 @@ public class Main {
             }
         });
 
-        before("/new", (req, res) -> {
+        before("/admin/*", (req, res) -> {
+            res.cookie("redirectTo", req.uri());
+
             // Prompts for a username if one isn't present.
             if (req.attribute("username") == null) {
-                setFlashMessage(req, "Please sign in first");
+                setFlashMessage(req, "Please sign in first.");
                 res.redirect("/password");
                 halt();
             }
-            // Restricts ability to edit posts until a username of "admin" is entered.
+
+            // Restricts ability to add a new entry until a username of "admin" is entered.
             if (!req.attribute("username").equals("admin")) {
                 setFlashMessage(req, "Incorrect user name.  Please try again.");
-                res.redirect("/password");
-                halt();
-            }
-        });
-
-        before("/edit/:slug", (req, res) -> {
-            // Prompts for a username if one isn't present.
-            if (req.attribute("username") == null) {
-                setFlashMessage(req, "Please sign in first");
-                res.redirect("/password");
-                halt();
-            }
-            // Restricts ability to edit posts until a username of "admin" is entered.
-            if (!req.attribute("username").equals("admin")) {
-                setFlashMessage(req, "Incorrect user name. Please try again.");
                 res.redirect("/password");
                 halt();
             }
@@ -83,14 +71,14 @@ public class Main {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/new", (req, res) -> {
+        get("/admin/new", (req, res) -> {
             Map<String, String> model = new HashMap<>();
 
             // Displays page with form for adding a new blog entry.
             return new ModelAndView(model, "new.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/new", (req, res) -> {
+        post("/admin/new", (req, res) -> {
             String title = req.queryParams("title");
             String creator = req.queryParams("creator");
             String blogPost = req.queryParams("blogPost");
@@ -103,7 +91,7 @@ public class Main {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        get("/edit/:slug", (req, res) -> {
+        get("/admin/edit/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
             // Finds a specific blog entry and displays it on the edit page.
@@ -128,7 +116,7 @@ public class Main {
         get("/password", (req, res) -> {
             Map<String, String> model = new HashMap<>();
 
-            // Displays the password page.
+            // Displays password prompt page.
             return new ModelAndView(model, "password.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -137,9 +125,16 @@ public class Main {
 
             // Stores the response cookie into username, then redirects to home.
             String username = req.queryParams("username");
-            res.cookie("username", username);
+            res.cookie("/", "username", username,-1, false, false );
             model.put("username", username);
-            res.redirect("/");
+            String redirectTo = req.cookie("redirectTo");
+
+            if (redirectTo == null) {
+                res.redirect("/");
+            }
+
+            res.redirect(redirectTo);
+
             return null;
         }, new HandlebarsTemplateEngine());
 

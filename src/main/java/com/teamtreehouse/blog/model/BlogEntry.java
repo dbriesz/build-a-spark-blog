@@ -78,4 +78,8 @@ public class BlogEntry {
         date = new Date();
         return comments.add(comment);
     }
+
+    public void deleteEntry(BlogEntry blogEntry) {
+        blogEntry = new BlogEntry(null, null, null);
+    }
 }

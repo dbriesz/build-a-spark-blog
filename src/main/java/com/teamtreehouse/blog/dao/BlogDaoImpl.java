@@ -21,6 +21,11 @@ public class BlogDaoImpl implements BlogDao {
     }
 
     @Override
+    public boolean deleteEntry(BlogEntry blogEntry) {
+        return entries.remove(blogEntry);
+    }
+
+    @Override
     public List<BlogEntry> findAllEntries() {
         return new ArrayList<>(entries);
     }

@@ -9,6 +9,11 @@
                     <div class="entry">
                         <p>{{ blogEntry.blogPost }}</p>
                         <p><a class="link" href="/admin/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
+
+                        <form action="/detail/{{ blogEntry.slug }}/delete" method="post">
+                            <input type="submit" value="Delete Entry">
+                        </form>
+
                     </div>
                 </article>
             </div>

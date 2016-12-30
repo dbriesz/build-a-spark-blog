@@ -161,6 +161,13 @@ public class Main {
             return null;
         });
 
+        post("/detail/:slug/delete", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            dao.deleteEntry((blogEntry));
+            setFlashMessage(req, "Entry deleted!");
+            res.redirect("/");
+            return null;
+        });
     }
 
     private static void setFlashMessage(Request req, String message) {

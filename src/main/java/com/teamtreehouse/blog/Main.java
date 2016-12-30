@@ -53,7 +53,7 @@ public class Main {
             }
             // Restricts ability to edit posts until a username of "admin" is entered.
             if (!req.attribute("username").equals("admin")) {
-                setFlashMessage(req, "Incorrect user name. Please try again.");
+                setFlashMessage(req, "Incorrect user name.  Please try again.");
                 res.redirect("/password");
                 halt();
             }
@@ -79,6 +79,7 @@ public class Main {
 
             // Finds all exiting entries and adds them to the model, then displays them on the home page.
             model.put("entries", dao.findAllEntries());
+            model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -97,6 +98,7 @@ public class Main {
             // Creates a new blog entry with a title, creator and body text via the addEntry method and redirects to home page.
             BlogEntry blogEntry = new BlogEntry(title, creator, blogPost);
             dao.addEntry(blogEntry);
+            setFlashMessage(req, "New entry published!");
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -118,6 +120,7 @@ public class Main {
             String creator = req.queryParams("creator");
             String blogPost = req.queryParams("blogPost");
             blogEntry.editEntry(title, creator, blogPost);
+            setFlashMessage(req, "Entry updated!");
             res.redirect("/");
             return null;
         });

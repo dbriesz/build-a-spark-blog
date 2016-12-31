@@ -11,9 +11,12 @@ public class BlogEntry {
     private String blogPost;
     private Date date;
     private List<Comment> comments;
+    private Set<Tag> tags;
 
     public BlogEntry(String title, String creator, String blogPost) {
         comments = new ArrayList<>();
+        tags = new HashSet<>();
+
         this.title = title;
         this.date = new Date();
         this.creator = creator;
@@ -53,6 +56,10 @@ public class BlogEntry {
         return new ArrayList<>(comments);
     }
 
+    public Set getTags() {
+        return new HashSet<>(tags);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,12 +81,12 @@ public class BlogEntry {
     }
 
     public boolean addComment(Comment comment) {
-        // Store these comments!
         date = new Date();
         return comments.add(comment);
     }
 
-    public void deleteEntry(BlogEntry blogEntry) {
-        blogEntry = new BlogEntry(null, null, null);
+    public boolean addTag(Tag tag) {
+        return tags.add(tag);
     }
+
 }

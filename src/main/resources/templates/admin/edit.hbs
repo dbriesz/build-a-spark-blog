@@ -19,9 +19,26 @@
                     <input type="submit" value="Save Entry" class="button">
                     <a href="/" class="button button-secondary">Cancel</a>
                 </form>
+
+                <form action="/admin/edit/{{ blogEntry.slug }}/delete" method="post">
+                    <input type="submit" value="Delete Entry" class="button">
+                </form>
+
             </div>
         </div>
     </section>
+
+   <section class="entry-comments">
+       <div class="container">
+           <div class="new-tag">
+               <form action="/admin/edit/{{ blogEntry.slug }}/tag" method="post">
+                   <input type="text" name="tag"><br>
+                   <label for="tag">Tag</label>
+                   <input type="submit" value="Add Tag" class="button">
+               </form>
+           </div>
+       </div>
+   </section>
 
 {{/partial}}
 

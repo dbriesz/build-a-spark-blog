@@ -4,15 +4,19 @@ import com.teamtreehouse.blog.model.BlogEntry;
 import com.teamtreehouse.blog.model.Comment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BlogDaoImpl implements BlogDao {
     private List<BlogEntry> entries;
     private List<Comment> comments;
+    private Set<String> tags;
 
     public BlogDaoImpl() {
         entries = new ArrayList<>();
         comments = new ArrayList<>();
+        tags = new HashSet<>();
     }
 
     @Override

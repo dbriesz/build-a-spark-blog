@@ -110,9 +110,16 @@ input[type="submit"]:hover {
     border-color: #3e474f;
 }
 
-a.new-entry.button.button-round a:hover {
+.new-entry.button:hover {
     color: #b2bbbd;
     background: #3e474f;
+    border-color: #3e474f;
+}
+
+.button-secondary.button:hover {
+    color: #b2bbbd;
+    background: #3e474f;
+    border-color: #3e474f;
 }
 
 /* ==========================================================================

@@ -20,15 +20,16 @@
                     <a href="/" class="button button-secondary">Cancel</a>
                 </form>
 
+                <div class="container">
                 <form action="/admin/edit/{{ blogEntry.slug }}/delete" method="post">
                     <input type="submit" value="Delete Entry" class="button">
                 </form>
-
+                </div>
             </div>
-        </div>
+       </div>
     </section>
 
-   <section class="entry-comments">
+   <section class="entry-tags">
        <div class="container">
            <div class="new-tag">
                <form action="/admin/edit/{{ blogEntry.slug }}/tag" method="post">

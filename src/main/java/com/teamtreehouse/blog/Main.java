@@ -39,7 +39,7 @@ public class Main {
                 "Went to the mall today for the first time and felt very overwhelmed...");
         dao.addEntry(entry3);
         entry3.addComment(new Comment("Steve Trevor", "<3"));
-        entry2.addTag(new Tag("shopping"));
+        entry3.addTag(new Tag("shopping"));
 
         before((req, res) -> {
             // Check to see if a cookie is present and assigns the value to req.attribute for re-use.

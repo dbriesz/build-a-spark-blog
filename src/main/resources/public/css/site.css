@@ -3,12 +3,17 @@
 /* ==========================================================================
    Global Styles
    ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: url(../../concepts/JavaTechdegree_SparkBlog_1.jg) top center no-repeat;
     font-size: 15px;
-    color: #000;
-    font-family: 'Noto Serif', Georgia, serif;
-    background: #444;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background: #3e474f;
 }
 .container {
     margin: 0 auto;
@@ -19,35 +24,48 @@ header .site-header {
     border-bottom: 1px solid #d1d1d1;
     margin: 0 auto;
     height: 95px;
+    font-family: 'Francois One', sans-serif;
+    background: #3079AB;
+    z-index: 100;
+    min-width: inherit;
 }
 header .logo {
-    border: 5px solid #000;
     text-decoration: none;
-    color: #000;
+    color: #f1f1f1;
     font-size: 21px;
     font-weight: bold;
     padding: 5px 10px;
     margin: 24px 0 0 0;
     float: left;
     text-transform: uppercase;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Francois One', sans-serif;
 }
+
+header a.logo:hover {
+    color: #b2bbbd;
+}
+
 header .new-entry {
     float: right;
     margin: 25px 0 0 0;
+    font-family: 'Francois One', sans-serif;
 }
 footer {
-    background: #444;
+    background: #3e474f;
     height: 30px;
     text-align: center;
     padding: 35px 0;
     color: #999;
+    font-family: 'Francois One', sans-serif;
 }
 footer a {
-    color: #999;
+    color: #b2bbbd;
     text-decoration: none;
-    border-bottom: 2px solid #666;
     padding-bottom: 1px;
+}
+
+footer a:hover {
+    color: #fff;
 }
 
 
@@ -67,7 +85,10 @@ footer a {
     font-weight: bold;
     font-size: 13px;
     font-family: 'Noto Sans', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
+
 .button.button-secondary {
     background: transparent;
     border-color: #000;
@@ -78,11 +99,21 @@ footer a {
     padding: 9px;
     line-height: 1px;
 }
+
 .button:focus {
     outline: 0;
 }
 
+input[type="submit"]:hover {
+    color: #b2bbbd;
+    background: #3e474f;
+    border-color: #3e474f;
+}
 
+a.new-entry.button.button-round a:hover {
+    color: #b2bbbd;
+    background: #3e474f;
+}
 
 /* ==========================================================================
    Typography
@@ -96,11 +127,13 @@ h3 {
     line-height: 1.2em;
 }
 h1 {
-    font-size: 44px;
+    font-size: 40px;
     margin-bottom: 12px;
 }
+
 h2 {
-    font-size: 28px;
+    font-size: 20px;
+    color: #333;
 }
 h3 {
     font-size: 28px;
@@ -119,6 +152,10 @@ a.link {
     font-size: 14px;
     padding-bottom: 1px;
     font-family: 'Noto Sans', sans-serif;
+}
+
+a.link:hover {
+    color: #b2bbbd;
 }
 
 
@@ -154,6 +191,10 @@ a.link {
     text-decoration: none;
     color: #000;
 }
+
+.entry-list article a:hover {
+    color: #b2bbbd;
+}
 .entry-list time {
     color: #888;
 }
@@ -174,14 +215,23 @@ a.link {
 }
 .entry-comments {
     background: #f1f1f1;
-    padding: 70px 0;
+    padding: 50px 0;
 }
-.entry-comments .container {
+
+.entry-tags {
+    background: #f1f1f1;
+    padding: 20px 0;
+}
+
+.entry-comments .container,
+.entry-tags .container {
     background: transparent;
 }
 .entry-comments .container,
 .edit-entry .container,
-.new-entry .container {
+.new-entry .container,
+.entry-tags .container,
+.new-tag .container {
     max-width: 700px;
     margin: 0 auto;
 }
@@ -189,19 +239,31 @@ a.link {
     border-bottom: 1px solid #c1c1c1;
     padding-bottom: 35px;
 }
+
+.entry-tags h2 {
+    padding-bottom: 35px;
+}
+
 .comment {
     border-top: 1px solid #c1c1c1;
     border-bottom: 1px solid #c1c1c1;
     padding: 35px 0 20px;
     margin: 2px 0 0 0;
 }
+
+.tag {
+    padding: 10px 0 10px;
+    margin: 2px 0 0 0;
+}
+
 .comment time {
     display: block;
     color: #888;
     font-size: 14px;
     margin: 3px 0 20px 0;
 }
-.new-comment .container {
+.new-comment .container,
+.new-tag .container {
     max-width: 700px;
     margin: 0 auto;
 }
@@ -218,6 +280,12 @@ a.link {
     padding: 50px 0;
     margin-top: 2px;
 }
+
+.entry-tags form {
+    padding: 10px 0;
+    margin-top: 2px;
+}
+
 form label {
     display: block;
     font-family: 'Noto Sans', sans-serif;
@@ -238,7 +306,9 @@ form textarea {
     width: calc(100% - 32px);
 }
 .new-comment form input[type=text],
-.new-comment form textarea {
+.new-comment form textarea,
+.new-tag form input[type=text],
+.new-tag form textarea {
     font-size: 15px;
 }
 form input[type=text]:focus,
@@ -251,7 +321,8 @@ form input[type=text]:hover,
 form textarea:hover {
     border-color: #b1b1b1;
 }
-.new-comment form textarea {
+.new-comment form textarea,
+.new-tag form textarea {
     min-height: 125px;
 }
 .edit-entry form textarea,
@@ -262,6 +333,12 @@ input[type=submit] {
     margin-right: 5px;
 }
 
+
+/* =================================
+  Flash Messaging
+==================================== */
+
+
 #flash-message{
     background-color: #2c89ba;
     border-radius: 5px;
@@ -269,9 +346,61 @@ input[type=submit] {
     display: block;
     font-size: 14px;
     padding: 10px 20px;
+    max-width: 96%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
+/* =================================
+  Media Queries
+==================================== */
 
+@media (min-width: 769px) {
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .name,
+    .col {
+        float: left;
+    }
+
+    .primary,
+    .secondary {
+        width: 50%;
+    }
+
+
+
+    /* ---- Float clearfix ---- */
+
+    .clearfix::after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+@media (min-width: 1025px) {
+
+    .container {
+        width: 80%;
+        max-width: 1150px;
+    }
+
+    .primary {
+        width: 40%;
+    }
+
+    .secondary,
+    .tertiary {
+        width: 30%;
+    }
+
+}
+
+}
 
 
 

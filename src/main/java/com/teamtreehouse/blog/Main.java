@@ -10,8 +10,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
@@ -167,8 +166,13 @@ public class Main {
 
         post("/admin/edit/:slug/tag", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
-            String tag = req.queryParams("tag");
-            boolean tagAdded = blogEntry.addTag(new Tag(tag));
+            String tags = req.queryParams("tag");
+            List<String> tagList = Arrays.asList(tags.split(","));
+            boolean tagAdded = false;
+            for (String tag : tagList) {
+                tagAdded = blogEntry.addTag(new Tag(tag));
+            }
+
             if (tagAdded) {
                 setFlashMessage(req, "Tag added!");
             }

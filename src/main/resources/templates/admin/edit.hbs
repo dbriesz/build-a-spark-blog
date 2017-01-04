@@ -2,44 +2,42 @@
 
 {{#partial "content"}}
 
-   <section>
-        <div class="container">
-            <div class="edit-entry">
-                <h2>Edit Entry</h2>
-                <form action="/detail/{{ blogEntry.slug }}/admin/edit" method="post">
-                    <label for="title"> Title</label>
-                    <input type="text" name="title" value="{{ blogEntry.title }}"><br>
+    <div class="container">
+    <form action="/detail/{{ blogEntry.slug }}/admin/edit" method="post">
 
-                    <label for="creator"> Name</label>
-                    <input type="text" name="creator" value="{{ blogEntry.creator }}"><br>
+        <h2>Edit Entry</h2>
 
-                    <label for="blogPost">Entry</label>
-                    <textarea rows="5" name="blogPost" value="{{ blogEntry.blogPost }}"></textarea>
+        <fieldset>
 
-                    <input type="submit" value="Save Entry" class="button">
-                    <a href="/" class="button button-secondary">Cancel</a>
-                </form>
+            <legend><span class="edit-entry"></span>Entry changes</legend>
 
-                <div class="container">
-                <form action="/admin/edit/{{ blogEntry.slug }}/delete" method="post">
-                    <input type="submit" value="Delete Entry" class="button">
-                </form>
-                </div>
-            </div>
-       </div>
-    </section>
+            <label for="title">Title</label>
+            <input type="text" name="title" value="{{ blogEntry.title }}"><br>
 
-   <section class="entry-tags">
-       <div class="container">
-           <div class="new-tag">
-               <form action="/admin/edit/{{ blogEntry.slug }}/tag" method="post">
-                   <input type="text" name="tag"><br>
-                   <label for="tag">Tag</label>
-                   <input type="submit" value="Add Tag" class="button">
-               </form>
-           </div>
-       </div>
-   </section>
+            <label for="creator"> Name</label>
+            <input type="text" name="creator" value="{{ blogEntry.creator }}"><br>
+
+            <label for="blogPost">Entry</label>
+            <textarea rows="5" name="blogPost">{{ blogEntry.blogPost }}</textarea>
+
+        </fieldset>
+
+        <input type="submit" value="Save Entry" class="button">
+        <a href="/" class="button button-secondary">Cancel</a>
+
+    </form>
+
+        <form class="new-tag" action="/admin/edit/{{ blogEntry.slug }}/tag" method="post">
+            <input type="text" name="tag" value="{{#each blogEntry.tags }}{{ this.tag }}{{/each}}"><br>
+            <label for="tag">Tags (separated by commas)</label>
+            <input type="submit" value="Add Tag" class="button">
+        </form>
+
+        <form class="delete" action="/admin/edit/{{ blogEntry.slug }}/delete" method="post">
+            <input type="submit" value="Delete Entry" class="button">
+        </form>
+
+    </div>
 
 {{/partial}}
 

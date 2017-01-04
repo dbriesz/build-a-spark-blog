@@ -1,23 +1,22 @@
 {{#partial "content"}}
+    <div class="container">
 
-    <section>
-        <div class="container">
-            <div class="entry-list single">
-                <article>
-                    <h1>{{ blogEntry.title }}</h1>
-                    <time>{{ blogEntry.date }}</time>
-                    <div class="entry">
-                        <p>{{ blogEntry.blogPost }}</p>
-                        <p><a class="link" href="/admin/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
+    <div class="container">
+        <div class="entry-list single">
+            <article>
+                <h1>{{ blogEntry.title }}</h1>
+                <time>{{ blogEntry.date }}</time>
+                <div class="entry">
+                    <p>{{ blogEntry.blogPost }}</p>
+                    <p><a class="link" href="/admin/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
 
-                    </div>
-                </article>
-            </div>
+                </div>
+            </article>
         </div>
-    </section>
+    </div>
 
-    <section class="entry-tags">
-        <div class="container">
+    <div class="container">
+        <div class="entry-tags">
             <h2>Tags</h2>
             <div class="tag">
                 {{#each blogEntry.tags}}
@@ -25,10 +24,10 @@
                 {{/each}}
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="entry-comments">
-        <div class="container">
+    <div class="container">
+        <div class="entry-comments">
             <h2>Comments</h2>
             <div class="comment">
                 {{#each blogEntry.comments}}
@@ -37,18 +36,22 @@
                     <p>{{ this.body }}</p>
                 {{/each}}
             </div>
-            <div class="new-comment">
-                <form action="/detail/{{ blogEntry.slug }}/comment" method="post">
-                    <label for="name"> Name</label>
-                    <input type="text" name="author"><br>
-                    <label for="comment">Comment</label>
-                    <textarea rows="5" name="body"></textarea>
-                    <input type="submit" value="Post Comment" class="button">
-                </form>
-            </div>
         </div>
-    </section>
+    </div>
 
+    <div class="container">
+        <div class="new-comment">
+            <form action="/detail/{{ blogEntry.slug }}/comment" method="post">
+                <label for="name"> Name</label>
+                <input type="text" name="author"><br>
+                <label for="comment">Comment</label>
+                <textarea rows="5" name="body"></textarea>
+                <input type="submit" value="Post Comment" class="button">
+            </form>
+        </div>
+    </div>
+
+    </div>
 
 {{/partial}}
 

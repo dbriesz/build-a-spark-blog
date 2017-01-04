@@ -16,6 +16,7 @@ body {
     background: #3e474f;
 }
 .container {
+    width: 80%;
     margin: 0 auto;
     padding: 0 25px;
     background: #FFF;
@@ -26,8 +27,8 @@ header .site-header {
     height: 95px;
     font-family: 'Francois One', sans-serif;
     background: #3079AB;
+    padding: 1em 0;
     z-index: 100;
-    min-width: inherit;
 }
 header .logo {
     text-decoration: none;
@@ -224,16 +225,12 @@ a.link:hover {
 }
 .entry p {
     font-size: 18px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
-.entry-comments {
-    background: #f1f1f1;
-    padding: 50px 0;
-}
-
+.entry-comments,
 .entry-tags {
     background: #f1f1f1;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 .entry-comments .container,
@@ -244,7 +241,8 @@ a.link:hover {
 .edit-entry .container,
 .new-entry .container,
 .entry-tags .container,
-.new-tag .container {
+.new-tag .container,
+.new-comment .container {
     max-width: 700px;
     margin: 0 auto;
 }

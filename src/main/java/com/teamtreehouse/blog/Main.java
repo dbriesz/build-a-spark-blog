@@ -50,14 +50,14 @@ public class Main {
         before("/admin/*", (req, res) -> {
             res.cookie("/","redirectTo", req.uri(), -1, false, false);
 
-            // Prompts for a username if one isn't present.
+            // Prompts for a username if one isn't present, sets flash message and redirects to password page.
             if (req.attribute("username") == null) {
                 setFlashMessage(req, "Please sign in first.");
                 res.redirect("/password");
                 halt();
             }
 
-            // Restricts ability to add a new entry until a username of "admin" is entered.
+            // Restricts ability to add a new entry until a username of "admin" is entered, sets flash message and redirects to password page.
             if (!req.attribute("username").equals("admin")) {
                 setFlashMessage(req, "Incorrect user name.  Please try again.");
                 res.redirect("/password");
@@ -69,6 +69,7 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
 
             // Finds all exiting entries and adds them to the model, then displays them on the home page.
+            // Captures flash message and displays model on index page.
             model.put("entries", dao.findAllEntries());
             model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "index.hbs");
@@ -165,6 +166,9 @@ public class Main {
         });
 
         post("/admin/edit/:slug/tag", (req, res) -> {
+
+            // Finds a specific blog entry, adds tags via a comma separated List.
+            // Flash message set after a tag is added.  Redirects to home page.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String tags = req.queryParams("tag");
             List<String> tagList = Arrays.asList(tags.split(","));
@@ -181,6 +185,8 @@ public class Main {
         });
 
         post("/admin/edit/:slug/delete", (req, res) -> {
+
+            // Finds a specific blog entry and deletes that entry.  Flash message set after entry deleted.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             dao.deleteEntry((blogEntry));
             setFlashMessage(req, "Entry deleted!");

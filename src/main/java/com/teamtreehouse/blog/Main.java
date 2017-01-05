@@ -156,6 +156,10 @@ public class Main {
             // Finds a specific blog entry, passes in a new comment, then redirects to home.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String author = req.queryParams("author");
+            if (author.equals("")) {
+                author = "Anonymous";
+            }
+
             String body = req.queryParams("body");
             boolean commentAdded = blogEntry.addComment(new Comment(author, body));
             if (commentAdded) {

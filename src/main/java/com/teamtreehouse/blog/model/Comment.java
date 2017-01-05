@@ -1,16 +1,17 @@
 package com.teamtreehouse.blog.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Comment {
     private String author;
     private String body;
-    private Date date;
+    private String date;
 
     public Comment(String author, String body) {
         this.author = author;
         this.body = body;
-        this.date = new Date();
+        this.date = getDate();
     }
 
     public String getAuthor() {
@@ -21,8 +22,11 @@ public class Comment {
         return body;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MMMM d, yyyy h:mm aa");
+        String dateToStr= format.format(date);
+        return dateToStr;
     }
 
     @Override

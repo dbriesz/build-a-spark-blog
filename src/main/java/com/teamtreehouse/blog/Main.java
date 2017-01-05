@@ -29,7 +29,7 @@ public class Main {
         entry1.addTag(new Tag("county fair"));
 
         BlogEntry entry2 = new BlogEntry("The absolute worst day I’ve ever had", "Wally West",
-                "I'm back in Central City through some miracle, yet Linda doesn't remember me at all...");
+                "I'm back in Keystone City through some miracle, yet Linda doesn't remember me at all...");
         dao.addEntry(entry2);
         entry2.addComment(new Comment("Abra Kadabra", "I have finally defeated you!"));
         entry2.addTag(new Tag("bad day"));

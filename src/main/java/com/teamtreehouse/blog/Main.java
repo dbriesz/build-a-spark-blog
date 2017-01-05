@@ -148,12 +148,13 @@ public class Main {
 
             // Finds a specific blog entry, then displays it on the detail page.
             model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
+            model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/detail/:slug/comment", (req, res) -> {
 
-            // Finds a specific blog entry, passes in a new comment, then redirects to home.
+            // Finds a specific blog entry, passes in a new comment, then redirects to the detail page.
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String author = req.queryParams("author");
             if (author.equals("")) {
@@ -165,7 +166,7 @@ public class Main {
             if (commentAdded) {
                 setFlashMessage(req, "Thanks for your comment!");
             }
-            res.redirect("/");
+            res.redirect("/detail/" + blogEntry.getSlug());
             return null;
         });
 
